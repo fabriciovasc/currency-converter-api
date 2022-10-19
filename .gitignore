@@ -1,0 +1,13 @@
+logs
+*.log
+npm-debug.log*
+.idea/*
+.vscode/*
+.history/
+node_modules/
+.npm
+.env.test
+.env.dev
+.env.prod
+build/*
+
