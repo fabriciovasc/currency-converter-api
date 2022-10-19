@@ -4,7 +4,6 @@
   "description": "A simple currency converter service",
   "main": "build/index.js",
   "scripts": {
-    "migrate:database": "prisma migrate dev",
     "build": "rimraf ./build && tsc",
     "start": "npm run ./build && node ./build/index.js",
     "start:dev": "nodemon",

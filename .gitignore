@@ -23,3 +23,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+# Database local files
+/prisma/*.db
+/prisma/*.db-journal
