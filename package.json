@@ -4,6 +4,7 @@
   "description": "A simple currency converter service",
   "main": "build/index.js",
   "scripts": {
+    "migrate:database": "prisma migrate dev",
     "build": "rimraf ./build && tsc",
     "start": "npm run ./build && node ./build/index.js",
     "start:dev": "nodemon",
@@ -30,6 +31,7 @@
     "jest": "^29.2.1",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
+    "prisma": "^4.5.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
@@ -38,5 +40,8 @@
   "devEngines": {
     "node": ">=14.x",
     "npm": ">=6.x"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.5.0"
   }
 }
