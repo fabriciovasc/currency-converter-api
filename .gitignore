@@ -1,13 +1,25 @@
-logs
-*.log
-npm-debug.log*
-.idea/*
-.vscode/*
-.history/
-node_modules/
-.npm
+/node_modules
+/build
+
+# Keep environment variables out of version control
+.env
 .env.test
 .env.dev
 .env.prod
-build/*
 
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
