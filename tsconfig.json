@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018",
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -8,7 +8,9 @@
     "skipLibCheck": true,
     "outDir": "build",
     "rootDir": "src",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "sourceMap": true
   },
-  "exclude": ["tests"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["tests", "node_modules"]
 }
