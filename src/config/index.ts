@@ -6,7 +6,7 @@ const appConfig = {
     port: parseInt(<string>process.env.PORT, 10) || 8090
   },
   exchangeRateApi: {
-    API_KEY: process.env.EXCHANGE_RATE_API_KEY || 'CCPa1bY1jjusV0uYEsCN9ZqLNqsSA0IZ'
+    ACCESS_KEY: process.env.EXCHANGE_RATE_ACCESS_KEY || 'CCPa1bY1jjusV0uYEsCN9ZqLNqsSA0IZ'
   }
 };
 
