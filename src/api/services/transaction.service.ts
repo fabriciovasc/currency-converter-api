@@ -5,13 +5,15 @@ import CurrencyConverter from '@models/currency-converter.model';
 import { Transaction } from '@prisma/client';
 import prismaClient from '@database/prisma-client';
 
+type TransactionResponse = Transaction & { quoteValue: number };
+
 class TransactionService {
   createTransaction = async ({
     userId,
     baseCurrency,
     quoteCurrency,
     baseValue
-  }: TransactionInput): Promise<Transaction & { quoteValue: number }> => {
+  }: TransactionInput): Promise<TransactionResponse> => {
     if (!userId) {
       throw new HttpException(ErrorCode.MISSING_FIELD, 'userId is required');
     }
@@ -45,20 +47,41 @@ class TransactionService {
       throw new HttpException(ErrorCode.INVALID_FIELD, `Invalid quoteCurrency ${quoteCurrency} for conversion`);
     }
 
-    const { conversionRate, quoteValue } = new CurrencyConverter(
+    const { conversionRate, quoteValue, quoteRate } = new CurrencyConverter(
       baseValue as unknown as number,
       baseCurrencyValue,
       quoteCurrencyValue
     );
 
     const createdTransaction: Transaction = await prismaClient.transaction.create({
-      data: { userId, baseCurrency, quoteCurrency, baseValue, conversionRate }
+      data: { userId, baseCurrency, quoteCurrency, baseValue, conversionRate, quoteRate }
     });
 
     return { ...createdTransaction, quoteValue };
   };
 
-  getTransactions = async () => {};
+  getTransactionsByUserId = async (userId: number): Promise<TransactionResponse[]> => {
+    if (!userId || userId <= 0) {
+      throw new HttpException(ErrorCode.INVALID_FIELD, `Invalid userId ${userId} for get transactions`);
+    }
+
+    const userTransactions: Transaction[] = await prismaClient.transaction.findMany({
+      where: { userId }
+    });
+
+    if (!userTransactions || !userTransactions.length) {
+      throw new HttpException(ErrorCode.TRANSACTIONS_NOT_FOUND, `Transactions not found for userId ${userId}`);
+    }
+
+    const userTransactionsWithQuoteValue: TransactionResponse[] = userTransactions.map(
+      ({ baseValue, quoteRate, ...rest }) => {
+        const quoteValue = CurrencyConverter.getQuote(baseValue as unknown as number, quoteRate as unknown as number);
+        return { ...rest, baseValue, quoteRate, quoteValue };
+      }
+    );
+
+    return userTransactionsWithQuoteValue;
+  };
 }
 
 export default new TransactionService();

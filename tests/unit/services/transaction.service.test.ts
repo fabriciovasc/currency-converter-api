@@ -125,4 +125,67 @@ describe('transaction service', () => {
       await expect(TransactionService.createTransaction(transaction)).resolves.toHaveProperty('quoteValue');
     });
   });
+
+  describe('get transactions by user id', () => {
+    test('should throw an error when get transactions without user id', async () => {
+      // Given
+      const userId = -1;
+
+      // Then
+      await expect(TransactionService.getTransactionsByUserId(userId)).rejects.toThrowError(
+        `Invalid userId ${userId} for get transactions`
+      );
+    });
+
+    test('should throw an error when not found transactions', async () => {
+      // Given
+      const userId = 1;
+
+      // When
+      prismaMock.transaction.findMany.mockResolvedValue([]);
+
+      // Then
+      await expect(TransactionService.getTransactionsByUserId(userId)).rejects.toThrowError(
+        `Transactions not found for userId ${userId}`
+      );
+    });
+
+    test('should return user transactions with quoteValue', async () => {
+      // Given
+      const userId = 1;
+      const mockedTransaction1: any = {
+        userId,
+        baseCurrency: 'BRL',
+        quoteCurrency: 'USD',
+        baseValue: 10,
+        conversionRate: 3,
+        quoteRate: 2,
+        createdAt: new Date()
+      };
+
+      const mockedTransaction2: any = {
+        userId,
+        baseCurrency: 'JPY',
+        quoteCurrency: 'USD',
+        baseValue: 3,
+        conversionRate: 1,
+        quoteRate: 1.5,
+        createdAt: new Date()
+      };
+
+      const mockedTransactions: any = [mockedTransaction1, mockedTransaction2];
+
+      // When
+      prismaMock.transaction.findMany.mockResolvedValue(mockedTransactions);
+
+      // Then
+      await expect(TransactionService.getTransactionsByUserId(userId)).resolves.toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            quoteValue: expect.any(Number)
+          })
+        ])
+      );
+    });
+  });
 });
