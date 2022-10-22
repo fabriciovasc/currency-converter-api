@@ -10,9 +10,9 @@ datasource db {
 model Transaction {
   id             Int      @id @default(autoincrement())
   userId         Int
-  currencyFrom   String
-  currencyTo     String
-  valueFrom      Decimal
+  baseCurrency   String
+  quoteCurrency  String
+  baseValue      Decimal
   conversionRate Decimal
   createdAt      DateTime @default(now())
 
