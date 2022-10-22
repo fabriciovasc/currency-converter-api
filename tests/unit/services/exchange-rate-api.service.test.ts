@@ -1,5 +1,5 @@
-import ExchangeRateApiService from '../../../src/api/services/exchange-rate-api.service';
 import axios from 'axios';
+import ExchangeRateApiService from '@services/exchange-rate-api.service';
 import mocked = jest.mocked;
 
 jest.mock('axios');

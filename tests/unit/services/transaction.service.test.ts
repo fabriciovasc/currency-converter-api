@@ -1,7 +1,7 @@
-import TransactionService from '../../../src/api/services/transaction.service';
+import TransactionService from '@services/transaction.service';
 import prismaMock from '../../prisma-mock';
 
-jest.mock('../../../src/api/services/exchange-rate-api.service');
+jest.mock('@services/exchange-rate-api.service');
 
 describe('transaction service', () => {
   describe('create transaction', () => {

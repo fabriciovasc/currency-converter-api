@@ -1,4 +1,4 @@
-import CurrencyConverter from '../../../src/api/models/currency-converter.model';
+import CurrencyConverter from '@models/currency-converter.model';
 
 const brlToUsd = {
   baseCurrency: 'BRL',

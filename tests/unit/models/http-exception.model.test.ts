@@ -1,4 +1,4 @@
-import HttpException from '../../../src/api/models/http-exception.model';
+import HttpException from '@models/http-exception.model';
 
 const testCases = [
   { errorCode: 100, errorType: 'MISSING_FIELD', statusCode: 400, message: 'foo is required' },
