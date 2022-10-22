@@ -30,10 +30,10 @@ const ErrorHttpStatusCodes: { [key in ErrorCode]: HttpStatusCode } = {
 };
 
 class HttpException extends Error {
-  public errorCode: number;
+  public readonly errorCode: number;
 
-  private readonly errorType: ErrorType;
-  private readonly statusCode: HttpStatusCode;
+  public readonly errorType: ErrorType;
+  public readonly statusCode: HttpStatusCode;
 
   constructor(errorCode: ErrorCode, public readonly message: string) {
     super(message);
