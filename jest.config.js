@@ -1,12 +1,12 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
+const { pathsToModuleNameMapper } = require('ts-jest');
+const { compilerOptions } = require('./tsconfig.json');
+
 module.exports = {
   clearMocks: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
   setupFilesAfterEnv: ['<rootDir>/tests/prisma-mock.ts'],
-  moduleNameMapper: {
-    '^@models/(.*)$': '<rootDir>/src/api/models/$1',
-    '^@services/(.*)$': '<rootDir>/src/api/services/$1',
-    '^@database/(.*)$': '<rootDir>/src/database/$1'
-  }
+  moduleDirectories: ['<rootDir>/node_modules', '<rootDir>/src'],
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' })
 };
