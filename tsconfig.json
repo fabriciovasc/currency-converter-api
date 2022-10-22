@@ -7,14 +7,14 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "build",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "noImplicitAny": true,
     "sourceMap": true,
     "paths": {
-      "@models/*": ["./src/api/models/*"],
-      "@services/*": ["./src/api/services/*"],
-      "@config/*": ["./src/config/*"],
-      "@database/*": ["./src/database/*"]
+      "@models/*": ["./api/models/*"],
+      "@services/*": ["./api/services/*"],
+      "@config/*": ["./config/*"],
+      "@database/*": ["./database/*"]
     }
   },
   "exclude": ["tests"]
