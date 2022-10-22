@@ -7,9 +7,15 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "build",
+    "baseUrl": ".",
     "noImplicitAny": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "paths": {
+      "@models/*": ["./src/api/models/*"],
+      "@services/*": ["./src/api/services/*"],
+      "@config/*": ["./src/config/*"],
+      "@database/*": ["./src/database/*"]
+    }
   },
-  "include": ["src/**/*"],
-  "exclude": ["tests"],
+  "exclude": ["tests"]
 }
