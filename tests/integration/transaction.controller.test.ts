@@ -1,8 +1,8 @@
 import createServer from '../../src/server';
 import supertest from 'supertest';
 import prismaClient from '@database/prisma-client';
-import ExchangeRateApiService from '../../src/api/services/exchange-rate-api.service';
-import { mockGetExchangeRates } from '../../src/api/services/__mocks__/exchange-rate-api.service';
+import ExchangeRateApiService from '@services/exchange-rate-api.service';
+import { mockGetExchangeRates } from '@services/__mocks__/exchange-rate-api.service';
 
 const app = createServer();
 

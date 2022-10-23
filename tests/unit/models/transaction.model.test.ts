@@ -1,5 +1,5 @@
 import { Prisma, Transaction } from '@prisma/client';
-import { transactionOutputMapper } from '../../../build/api/models/transaction.model';
+import { transactionOutputMapper } from '@models/transaction.model';
 
 describe('transaction model', () => {
   test('transaction output mapper', () => {
