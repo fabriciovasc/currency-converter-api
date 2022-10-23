@@ -10,11 +10,14 @@
     "baseUrl": "./src",
     "noImplicitAny": true,
     "sourceMap": true,
+    "resolveJsonModule": true,
     "paths": {
       "@models/*": ["./api/models/*"],
       "@services/*": ["./api/services/*"],
       "@config/*": ["./config/*"],
-      "@database/*": ["./database/*"]
+      "@database/*": ["./database/*"],
+      "@controllers/*": ["./api/controllers/*"],
+      "@middlewares/*": ["./api/middlewares/*"]
     }
   },
   "exclude": ["tests"]
