@@ -16,8 +16,7 @@ abstract class HttpClientService {
 
   private handleResponse = ({ data }: AxiosResponse) => Promise.resolve(data);
 
-  protected handleError = (error: any): Promise<HttpException> =>
-    Promise.reject(new HttpException(ErrorCode.UNAVAILABLE_API_SERVICE, error.message || error));
+  protected handleError = (error: any): Promise<HttpException> => Promise.reject(error.message);
 }
 
 export default HttpClientService;
