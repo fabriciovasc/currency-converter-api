@@ -17,7 +17,8 @@
       "@config/*": ["./config/*"],
       "@database/*": ["./database/*"],
       "@controllers/*": ["./api/controllers/*"],
-      "@middlewares/*": ["./api/middlewares/*"]
+      "@middlewares/*": ["./api/middlewares/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "exclude": ["tests"]
