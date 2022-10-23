@@ -9,7 +9,7 @@ const defaultConfig: Config = {
   testEnvironment: 'node',
   modulePaths: ['<rootDir>/../../src'],
   moduleDirectories: ['<rootDir>/../../node_modules', '<rootDir>/../../src'],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/../../src/' })
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/../..' })
 };
 
 export default defaultConfig;

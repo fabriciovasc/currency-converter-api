@@ -7,18 +7,19 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "build",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "noImplicitAny": true,
     "sourceMap": true,
     "resolveJsonModule": true,
+    "declaration": true,
     "paths": {
-      "@models/*": ["./api/models/*"],
-      "@services/*": ["./api/services/*"],
-      "@config/*": ["./config/*"],
-      "@database/*": ["./database/*"],
-      "@controllers/*": ["./api/controllers/*"],
-      "@middlewares/*": ["./api/middlewares/*"],
-      "@utils/*": ["./utils/*"]
+      "@models/*": ["src/api/models/*"],
+      "@services/*": ["src/api/services/*"],
+      "@config/*": ["src/config/*"],
+      "@database/*": ["src/database/*"],
+      "@controllers/*": ["src/api/controllers/*"],
+      "@middlewares/*": ["src/api/middlewares/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "exclude": ["tests"]
