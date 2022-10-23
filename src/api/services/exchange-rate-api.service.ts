@@ -28,18 +28,22 @@ class ExchangeRateApiService extends HttpClientService {
     return config;
   };
 
-  public getExchangeRates = (): Promise<{ [key: string]: number }> => {
+  public getExchangeRates = (symbols: string[] = []): Promise<{ [key: string]: number }> => {
     const base = 'EUR'; // Currency base available on free plan
-    return this.http.get('/latest', { params: { base } }).then(<any>this.getRatesFromResponse);
+    return this.http
+      .get('/latest', { params: { base, symbols: symbols.join(',') } })
+      .then(<any>this.getRatesFromResponse);
   };
 
   private getRatesFromResponse = (response: {
     success: boolean;
     rates: { [key: string]: number };
-    error?: { type: string };
+    error?: { type: string; message: string };
   }): { [key: string]: number } => {
     if (!response.success) {
-      throw new Error(response.error?.type);
+      const { type = 'unknown_error', message = 'External API error' } = response.error || {};
+      const errorMessage = `${type}: ${message}`;
+      throw new Error(errorMessage);
     }
     return response?.rates;
   };
