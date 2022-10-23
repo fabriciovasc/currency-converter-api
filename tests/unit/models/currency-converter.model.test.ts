@@ -4,33 +4,33 @@ const brlToUsd = {
   baseCurrency: 'BRL',
   quoteCurrency: 'USD',
   baseValue: 10,
-  baseCurrencyValue: 5.091368,
-  quoteCurrencyValue: 0.986144,
-  quoteValue: 1.937,
-  conversionRate: 5.163,
-  quoteRate: 0.516
+  baseCurrencyValue: 5.100068,
+  quoteCurrencyValue: 0.98801,
+  conversionRate: 1.937,
+  quoteRate: 0.194,
+  quoteValue: 1.94
 };
 
 const ugxToUzs = {
   baseCurrency: 'UGX',
   quoteCurrency: 'UZS',
   baseValue: 10,
-  baseCurrencyValue: 3761.324226,
-  quoteCurrencyValue: 10990.578114,
-  quoteValue: 29.22,
-  conversionRate: 2.922,
-  quoteRate: 0.292
+  baseCurrencyValue: 3730.016413,
+  quoteCurrencyValue: 10888.406875,
+  conversionRate: 29.191,
+  quoteRate: 2.919,
+  quoteValue: 29.19
 };
 
 const jpyToUsd = {
   baseCurrency: 'JPY',
   quoteCurrency: 'USD',
   baseValue: 10,
-  baseCurrencyValue: 145.628893,
-  quoteCurrencyValue: 0.986144,
-  quoteValue: 0.068,
-  conversionRate: 147.675,
-  quoteRate: 14.768
+  baseCurrencyValue: 147.019533,
+  quoteCurrencyValue: 0.98955,
+  conversionRate: 0.067,
+  quoteRate: 0.007,
+  quoteValue: 0.07
 };
 
 const usdToUsd = {
@@ -39,12 +39,23 @@ const usdToUsd = {
   baseValue: 10,
   baseCurrencyValue: 0.986144,
   quoteCurrencyValue: 0.986144,
-  quoteValue: 10,
-  conversionRate: 1,
-  quoteRate: 0.1
+  conversionRate: 10,
+  quoteRate: 1,
+  quoteValue: 10
 };
 
-const testCases = [brlToUsd, ugxToUzs, jpyToUsd, usdToUsd];
+const usdToBrl = {
+  baseCurrency: 'USD',
+  quoteCurrency: 'BRL',
+  baseValue: 10,
+  baseCurrencyValue: 0.986144,
+  quoteCurrencyValue: 5.091368,
+  conversionRate: 51.629,
+  quoteRate: 5.163,
+  quoteValue: 51.63
+};
+
+const testCases = [brlToUsd, ugxToUzs, jpyToUsd, usdToUsd, usdToBrl];
 
 const testCaseName = 'should return quoteValue $quoteValue from $baseCurrency to $quoteCurrency';
 

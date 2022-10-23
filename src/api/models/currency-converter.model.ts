@@ -14,8 +14,8 @@ class CurrencyConverter {
     this.baseCurrencyValue = baseCurrencyValue;
     this.quoteCurrencyValue = quoteCurrencyValue;
     this.conversionRate = this.getConversionRate();
-    this.quoteValue = this.convertBaseValueToQuoteValue();
     this.quoteRate = this.getQuoteRate();
+    this.quoteValue = CurrencyConverter.getQuote(baseValue, this.quoteRate);
   }
 
   static getQuote(baseValue: number, quoteRate: number): number {
@@ -26,20 +26,18 @@ class CurrencyConverter {
     return handleCurrency(this.conversionRate).divide(this.baseValue).value;
   }
 
-  private convertBaseValueToQuoteValue(): number {
-    if (this.baseCurrencyValue > this.quoteCurrencyValue) {
-      return handleCurrency(this.baseValue).divide(this.conversionRate).value;
-    }
-
-    return handleCurrency(this.conversionRate).multiply(this.baseValue).value;
-  }
-
   private getConversionRate(): number {
+    let diffCurrencyValue;
+    let conversion;
     if (this.quoteCurrencyValue > this.baseCurrencyValue) {
-      return handleCurrency(this.quoteCurrencyValue).divide(this.baseCurrencyValue).value;
+      diffCurrencyValue = this.quoteCurrencyValue / this.baseCurrencyValue;
+      conversion = diffCurrencyValue * this.baseValue;
+      return handleCurrency(conversion).value;
     }
 
-    return handleCurrency(this.baseCurrencyValue).divide(this.quoteCurrencyValue).value;
+    diffCurrencyValue = this.baseCurrencyValue / this.quoteCurrencyValue;
+    conversion = this.baseValue / diffCurrencyValue;
+    return handleCurrency(conversion).value;
   }
 }
 
