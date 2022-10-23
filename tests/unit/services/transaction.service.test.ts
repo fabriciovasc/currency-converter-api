@@ -1,5 +1,5 @@
 import TransactionService from '@services/transaction.service';
-import prismaMock from '../../prisma-mock';
+import prismaMock from '../../config/setup/prisma-mock';
 
 jest.mock('@services/exchange-rate-api.service');
 
@@ -133,7 +133,7 @@ describe('transaction service', () => {
 
       // Then
       await expect(TransactionService.getTransactionsByUserId(userId)).rejects.toThrowError(
-        `Invalid userId ${userId} for get transactions`
+        `Invalid userId for get transactions`
       );
     });
 

@@ -1,11 +1,11 @@
-import { TransactionInput } from '@models/transaction.model';
+import { TransactionInput, TransactionOutput } from '@models/transaction.model';
 import HttpException, { ErrorCode } from '@models/http-exception.model';
 import ExchangeRateApiService from './exchange-rate-api.service';
 import CurrencyConverter from '@models/currency-converter.model';
 import { Transaction } from '@prisma/client';
 import prismaClient from '@database/prisma-client';
 
-type TransactionResponse = Transaction & { quoteValue: number };
+type TransactionResponse = TransactionOutput & { quoteValue: number };
 
 class TransactionService {
   createTransaction = async ({
@@ -35,7 +35,13 @@ class TransactionService {
     }
 
     const exchangeRateApi = new ExchangeRateApiService();
-    const exchangeRates = await exchangeRateApi.getExchangeRates();
+
+    let exchangeRates: { [key: string]: number };
+    try {
+      exchangeRates = await exchangeRateApi.getExchangeRates([baseCurrency, quoteCurrency]);
+    } catch (error: any) {
+      throw new HttpException(ErrorCode.UNAVAILABLE_API_SERVICE, error?.message || 'External API error');
+    }
 
     const baseCurrencyValue = exchangeRates?.[baseCurrency];
     if (!baseCurrencyValue) {
@@ -61,8 +67,8 @@ class TransactionService {
   };
 
   getTransactionsByUserId = async (userId: number): Promise<TransactionResponse[]> => {
-    if (!userId || userId <= 0) {
-      throw new HttpException(ErrorCode.INVALID_FIELD, `Invalid userId ${userId} for get transactions`);
+    if (Number.isNaN(userId) || userId <= 0) {
+      throw new HttpException(ErrorCode.INVALID_FIELD, `Invalid userId for get transactions`);
     }
 
     const userTransactions: Transaction[] = await prismaClient.transaction.findMany({

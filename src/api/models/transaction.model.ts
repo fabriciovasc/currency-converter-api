@@ -1,5 +1,7 @@
 import type { Transaction } from '@prisma/client';
 
-type TransactionInput = Pick<Transaction, 'userId' | 'baseCurrency' | 'quoteCurrency' | 'baseValue'>;
+type TransactionInput = Partial<Transaction>;
 
-export { Transaction, TransactionInput };
+type TransactionOutput = Required<Transaction>;
+
+export { TransactionInput, TransactionOutput };
