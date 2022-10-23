@@ -2,7 +2,7 @@ name: Currency Converter Workflow
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
       - run: npm run build
 
   test:
-
+    needs: build
     runs-on: ubuntu-latest
 
     strategy:
