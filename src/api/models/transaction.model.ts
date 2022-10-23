@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import type { Transaction } from '@prisma/client';
+import handleCurrency from '@utils/currency';
 
 interface TransactionModel {
   id: number;
@@ -44,7 +45,7 @@ const transactionInputMapper = ({
   'userId' | 'baseValue' | 'baseCurrency' | 'quoteCurrency' | 'quoteRate' | 'conversionRate'
 > => ({
   ...rest,
-  baseValue: new Prisma.Decimal(baseValue),
+  baseValue: new Prisma.Decimal(handleCurrency(baseValue).value),
   quoteRate: new Prisma.Decimal(quoteRate),
   conversionRate: new Prisma.Decimal(conversionRate)
 });
