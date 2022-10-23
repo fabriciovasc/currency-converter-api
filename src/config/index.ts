@@ -1,5 +1,6 @@
 const appConfig = {
   app: {
+    name: 'Currency Converter',
     server: process.env.NODE_ENV || 'dev',
     isDevelopment: process.env.NODE_ENV === 'dev',
     apiVersion: process.env.API_VERSION || 'v1',
