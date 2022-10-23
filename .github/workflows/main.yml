@@ -10,13 +10,13 @@ on:
 
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
         run: npm run test
 
   deploy:
-    needs: build
+    needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Only deploy main branch
 
     runs-on: ubuntu-latest
