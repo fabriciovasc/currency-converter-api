@@ -132,27 +132,6 @@ describe('transaction controller', () => {
         });
     });
 
-    test('should raise bad request when invalid field', async () => {
-      // Given
-      const transaction = {
-        userId: 1,
-        baseValue: 10,
-        baseCurrency: 'NAS',
-        quoteCurrency: 'USD'
-      };
-
-      // Then
-      await request
-        .post('/api/v1/currency-converter/transactions')
-        .set('Content-Type', 'application/json')
-        .send(transaction)
-        .expect(400, {
-          code: 101,
-          type: 'INVALID_FIELD',
-          message: `Invalid baseCurrency ${transaction.baseCurrency} for conversion`
-        });
-    });
-
     test('should raise bad request when unavailable exchange rate api service', async () => {
       // Given
       const transaction = {
