@@ -16,7 +16,7 @@
     "start:dev": "nodemon",
     "test:unit": "jest -i -c tests/config/jest.config.unit.ts",
     "test:integration": "jest -i -c tests/config/jest.config.integration.ts",
-    "test": "npm run test:unit && test:integration",
+    "test": "npm run test:unit && npm run test:integration",
     "prisma:dev": "prisma migrate dev",
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
