@@ -25,5 +25,10 @@
 .history/*
 
 # Database local files
-/prisma/*.db
-/prisma/*.db-journal
+/prisma/dev.db
+/prisma/dev.db-journal
+/prisma/test_*.db
+/prisma/test_*.db-journal
+
+# Log files
+/logs

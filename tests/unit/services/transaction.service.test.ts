@@ -1,5 +1,6 @@
 import TransactionService from '@services/transaction.service';
 import prismaMock from '../../config/setup/prisma-mock';
+import { Prisma } from '@prisma/client';
 
 jest.mock('@services/exchange-rate-api.service');
 
@@ -108,13 +109,15 @@ describe('transaction service', () => {
         userId: 1,
         baseCurrency: 'BRL',
         quoteCurrency: 'USD',
-        baseValue: 10
+        baseValue: 1
       };
 
       const mockedTransaction: any = {
         ...transaction,
         id: 1,
-        conversionRate: 2,
+        baseValue: new Prisma.Decimal(transaction.baseValue),
+        conversionRate: new Prisma.Decimal(2),
+        quoteRate: new Prisma.Decimal(4),
         createdAt: new Date()
       };
 
@@ -157,9 +160,9 @@ describe('transaction service', () => {
         userId,
         baseCurrency: 'BRL',
         quoteCurrency: 'USD',
-        baseValue: 10,
-        conversionRate: 3,
-        quoteRate: 2,
+        baseValue: new Prisma.Decimal(10),
+        conversionRate: new Prisma.Decimal(3),
+        quoteRate: new Prisma.Decimal(2),
         createdAt: new Date()
       };
 
@@ -167,9 +170,9 @@ describe('transaction service', () => {
         userId,
         baseCurrency: 'JPY',
         quoteCurrency: 'USD',
-        baseValue: 3,
-        conversionRate: 1,
-        quoteRate: 1.5,
+        baseValue: new Prisma.Decimal(3),
+        conversionRate: new Prisma.Decimal(1),
+        quoteRate: new Prisma.Decimal(1.5),
         createdAt: new Date()
       };
 
