@@ -29,3 +29,6 @@
 /prisma/dev.db-journal
 /prisma/test_*.db
 /prisma/test_*.db-journal
+
+# Log files
+/logs
