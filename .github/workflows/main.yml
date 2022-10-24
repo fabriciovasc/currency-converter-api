@@ -54,6 +54,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Make environment
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_NODE_ENV: production
+          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Run production migration
         run: npm run prisma:deploy
 
