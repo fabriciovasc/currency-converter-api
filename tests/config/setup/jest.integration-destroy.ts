@@ -7,7 +7,7 @@ const run = (command: string) => execSync(command, { stdio: 'inherit' });
 const destroyTestDatabase = (): void => {
   const projectRootPath = join(__dirname, '..', '..', '..');
 
-  config({ path: join(projectRootPath, '.env.test') });
+  config({ path: join(projectRootPath, '.env') });
   const schemaId = process.env.DATABASE_SCHEMA;
 
   console.info(`Deleting schema ${schemaId}`);
