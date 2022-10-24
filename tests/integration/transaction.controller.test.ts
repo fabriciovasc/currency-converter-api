@@ -48,7 +48,6 @@ describe('transaction controller', () => {
         userId: 2,
         baseCurrency: 'BRL',
         quoteCurrency: 'USD',
-        quoteRate: 1,
         baseValue: 10,
         conversionRate: 3
       };
@@ -74,7 +73,6 @@ describe('transaction controller', () => {
         baseValue: 10,
         baseCurrency: 'BRD',
         quoteCurrency: 'USD',
-        quoteRate: 1,
         conversionRate: 2
       };
 
