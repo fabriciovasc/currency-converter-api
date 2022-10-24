@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 import express, { Application, Request, Response, Router } from 'express';
 import cors, { CorsOptions } from 'cors';
 import errorHandler from '@middlewares/handlers/error-handler.middleware';

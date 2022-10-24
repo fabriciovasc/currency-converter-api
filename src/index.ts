@@ -1,7 +1,3 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-
 import { Server } from 'net';
 import createServer from './server';
 import config from './config';
