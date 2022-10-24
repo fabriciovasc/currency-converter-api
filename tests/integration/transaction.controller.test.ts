@@ -19,12 +19,12 @@ beforeEach(async () => {
 });
 
 describe('transaction controller', () => {
-  describe('GET /currency-converter/users/:id/transactions', () => {
+  describe('GET /users/:id/transactions', () => {
     test('should raise bad request when invalid user id', async () => {
       // Given
       const userId = 'foo';
 
-      await request.get(`/api/v1/currency-converter/users/${userId}/transactions`).expect(400, {
+      await request.get(`/api/v1/users/${userId}/transactions`).expect(400, {
         code: 101,
         type: 'INVALID_FIELD',
         message: `Invalid userId for get transactions`
@@ -35,7 +35,7 @@ describe('transaction controller', () => {
       // Given
       const userId = 1;
 
-      await request.get(`/api/v1/currency-converter/users/${userId}/transactions`).expect(404, {
+      await request.get(`/api/v1/users/${userId}/transactions`).expect(404, {
         code: 103,
         type: 'TRANSACTIONS_NOT_FOUND',
         message: `Transactions not found for userId ${userId}`
@@ -60,7 +60,7 @@ describe('transaction controller', () => {
 
       // Then
       const userId = 1;
-      await request.get(`/api/v1/currency-converter/users/${userId}/transactions`).expect(404, {
+      await request.get(`/api/v1/users/${userId}/transactions`).expect(404, {
         code: 103,
         type: 'TRANSACTIONS_NOT_FOUND',
         message: `Transactions not found for userId ${userId}`
@@ -84,15 +84,13 @@ describe('transaction controller', () => {
       });
 
       // Then
-      const response = await request
-        .get(`/api/v1/currency-converter/users/${transaction.userId}/transactions`)
-        .expect(200);
+      const response = await request.get(`/api/v1/users/${transaction.userId}/transactions`).expect(200);
       const transactions = response.body;
       expect(transactions).toHaveLength(1);
     });
   });
 
-  describe('POST /currency-converter/transactions', () => {
+  describe('POST /transactions', () => {
     test('should raise bad request when missing field', async () => {
       // Given
       const transaction = {
@@ -100,15 +98,11 @@ describe('transaction controller', () => {
       };
 
       // Then
-      await request
-        .post('/api/v1/currency-converter/transactions')
-        .set('Content-Type', 'application/json')
-        .send(transaction)
-        .expect(400, {
-          code: 100,
-          type: 'MISSING_FIELD',
-          message: 'userId is required'
-        });
+      await request.post('/api/v1/transactions').set('Content-Type', 'application/json').send(transaction).expect(400, {
+        code: 100,
+        type: 'MISSING_FIELD',
+        message: 'userId is required'
+      });
     });
 
     test('should raise bad request when invalid field', async () => {
@@ -122,7 +116,7 @@ describe('transaction controller', () => {
 
       // Then
       await request
-        .post('/api/v1/currency-converter/transactions')
+        .post('/api/v1/transactions')
         .set('Content-Type', 'application/json')
         .send(transaction)
         .expect(400, {
@@ -145,15 +139,11 @@ describe('transaction controller', () => {
       exchangeRateApiMock.getExchangeRates.mockRejectedValue(new Error());
 
       // Then
-      await request
-        .post('/api/v1/currency-converter/transactions')
-        .set('Content-Type', 'application/json')
-        .send(transaction)
-        .expect(503, {
-          code: 102,
-          type: 'UNAVAILABLE_API_SERVICE',
-          message: 'External API error'
-        });
+      await request.post('/api/v1/transactions').set('Content-Type', 'application/json').send(transaction).expect(503, {
+        code: 102,
+        type: 'UNAVAILABLE_API_SERVICE',
+        message: 'External API error'
+      });
     });
 
     test('should return transaction', async () => {
@@ -169,11 +159,7 @@ describe('transaction controller', () => {
       exchangeRateApiMock.getExchangeRates.mockResolvedValue(mockGetExchangeRates());
 
       // Then
-      await request
-        .post('/api/v1/currency-converter/transactions')
-        .set('Content-Type', 'application/json')
-        .send(transaction)
-        .expect(200);
+      await request.post('/api/v1/transactions').set('Content-Type', 'application/json').send(transaction).expect(200);
     });
   });
 });
