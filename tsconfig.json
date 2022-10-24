@@ -19,7 +19,8 @@
       "@database/*": ["src/database/*"],
       "@controllers/*": ["src/api/controllers/*"],
       "@middlewares/*": ["src/api/middlewares/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@routes/*": ["src/api/routes/*"]
     }
   },
   "exclude": ["tests"]

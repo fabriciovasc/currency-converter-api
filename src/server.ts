@@ -1,9 +1,15 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 import express, { Application, Request, Response, Router } from 'express';
 import cors, { CorsOptions } from 'cors';
 import errorHandler from '@middlewares/handlers/error-handler.middleware';
 import config from '@config/index';
-import routes from './api/routes';
 import MorganMiddleware from '@middlewares/morgan/morgan.middleware';
+import routes from '@routes/index';
+import swagger from 'swagger-ui-express';
+import { specs } from '@utils/swagger';
 
 const createServer = (): Application => {
   const app = express();
@@ -27,6 +33,11 @@ const createServer = (): Application => {
   const apiVersion = config.app.apiVersion || 'v1';
   const router: Router = routes[apiVersion];
   app.use(`/api/${config.app.apiVersion}`, router);
+
+  if (config.app.isDevelopment) {
+    // Swagger API doc is available in development environment
+    app.use(`/docs/${apiVersion}`, swagger.serve, swagger.setup(specs));
+  }
 
   app.use(errorHandler);
 

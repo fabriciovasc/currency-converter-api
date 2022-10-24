@@ -1,11 +1,7 @@
-import * as dotenv from 'dotenv';
-
 import { Server } from 'net';
 import createServer from './server';
 import config from './config';
 import Logger from './utils/logger';
-
-dotenv.config();
 
 const SERVER_PORT = config.app.port;
 

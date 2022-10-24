@@ -12,7 +12,7 @@ const setupTestDatabase = (): void => {
 
   const prismaBin = join(projectRootPath, 'node_modules', '.bin', 'prisma');
 
-  config({ path: join(projectRootPath, '.env.test') });
+  config({ path: join(projectRootPath, '.env') });
 
   const schemaId = `test_${v4()}`;
   process.env.DATABASE_SCHEMA = schemaId;

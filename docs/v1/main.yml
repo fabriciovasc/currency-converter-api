@@ -1,0 +1,65 @@
+/transactions:
+  post:
+    summary: Transaction
+    description: Create transaction
+    tags:
+      - main
+    requestBody:
+      content:
+        'application/json':
+          schema:
+            properties:
+              userId:
+                type: integer
+                format: int32
+              baseValue:
+                type: number
+                format: float
+              baseCurrency:
+                type: string
+              quoteCurrency:
+                type: string
+            required:
+              - userId
+              - baseValue
+              - baseCurrency
+              - quoteCurrency
+            example:
+              userId: 1
+              baseValue: 10
+              baseCurrency: 'BRL'
+              quoteCurrency: 'USD'
+      required: true
+    responses:
+      200:
+        $ref: '#/components/responses/200'
+      400:
+        $ref: '#/components/responses/400'
+      503:
+        $ref: '#/components/responses/503'
+
+/users/{userId}/transactions:
+  get:
+    summary: User transactions
+    description: Get user transactions by id
+    tags:
+      - main
+    parameters:
+      - name: userId
+        in: path
+        description: User ID of transaction
+        required: true
+        schema:
+          type: integer
+          format: int32
+    responses:
+      200:
+        $ref: '#/components/responses/200'
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserTransactions'
+      400:
+        $ref: '#/components/responses/400'
+      404:
+        $ref: '#/components/responses/404'

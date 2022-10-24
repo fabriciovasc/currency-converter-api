@@ -11,6 +11,7 @@ on:
 
 jobs:
   test:
+    environment: test
 
     runs-on: ubuntu-latest
 
@@ -27,6 +28,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      - name: Make environment
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_NODE_ENV: test
+          envkey_API_VERSION: v1
+          envkey_PORT: 8090
+
       - name: Install dependencies
         run: npm ci
 
@@ -34,6 +42,7 @@ jobs:
         run: npm run test
 
   deploy:
+    environment: production
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Only deploy main branch
 
@@ -47,8 +56,6 @@ jobs:
 
       - name: Run production migration
         run: npm run prisma:deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.12.12
