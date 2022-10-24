@@ -21,6 +21,7 @@
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
     "prisma:deploy": "prisma migrate deploy",
+    "prisma:reset": "prisma migrate reset",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
   },

@@ -92,7 +92,7 @@ jobs:
           envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Run production migration
-        run: npm run prisma:deploy
+        run: npm run prisma:reset
 
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.12.12
