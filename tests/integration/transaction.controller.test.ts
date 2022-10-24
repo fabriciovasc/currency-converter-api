@@ -49,7 +49,8 @@ describe('transaction controller', () => {
         baseCurrency: 'BRL',
         quoteCurrency: 'USD',
         baseValue: 10,
-        conversionRate: 3
+        conversionRate: 3,
+        quoteRate: 1.5
       };
 
       // When
@@ -73,7 +74,8 @@ describe('transaction controller', () => {
         baseValue: 10,
         baseCurrency: 'BRD',
         quoteCurrency: 'USD',
-        conversionRate: 2
+        conversionRate: 2,
+        quoteRate: 1.5
       };
 
       // When
