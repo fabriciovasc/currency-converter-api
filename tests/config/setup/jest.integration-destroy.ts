@@ -1,34 +1,28 @@
 import { join } from 'path';
-import { execSync } from 'child_process';
 import { config } from 'dotenv';
+import pg from 'pg';
 
-const run = (command: string) => execSync(command, { stdio: 'inherit' });
-
-const destroyTestDatabase = (): void => {
-  const projectRootPath = join(__dirname, '..', '..', '..');
-
-  config({ path: join(projectRootPath, '.env') });
+const destroyTestDatabase = async () => {
+  config({ path: join(__dirname, '..', '..', '..', '.env.test') });
   const schemaId = process.env.DATABASE_SCHEMA;
 
   console.info(`Deleting schema ${schemaId}`);
 
-  const rimRafBin = join(projectRootPath, 'node_modules', '.bin', 'rimraf');
+  const client = new pg.Client({
+    connectionString: process.env.DATABASE_URL
+  });
 
-  const prismaRoot = join(projectRootPath, 'prisma');
-
-  const dbFiles = join(prismaRoot, '*.db');
-  run(`${rimRafBin} ${dbFiles}`);
-
-  const journalDbFiles = join(prismaRoot, '*.db-journal');
-  run(`${rimRafBin} ${journalDbFiles}`);
+  await client.connect();
+  await client.query(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`);
+  await client.end();
 
   console.info(`Schema ${schemaId} deleted`);
 };
 
-export default () => {
+export default async () => {
   console.info('Destroying integration test environment');
 
-  destroyTestDatabase();
+  await destroyTestDatabase();
 
   console.info('Integration test environment destroyed');
 };

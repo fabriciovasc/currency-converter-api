@@ -8,19 +8,14 @@ const run = (command: string) => execSync(command, { stdio: 'inherit' });
 const setupTestDatabase = (): void => {
   console.info('Setup test database');
 
-  const projectRootPath = join(__dirname, '..', '..', '..');
-
-  const prismaBin = join(projectRootPath, 'node_modules', '.bin', 'prisma');
-
-  config({ path: join(projectRootPath, '.env') });
+  config({ path: join(__dirname, '..', '..', '..', '.env.test') });
 
   const schemaId = `test_${v4()}`;
   process.env.DATABASE_SCHEMA = schemaId;
 
-  const databaseURL = join(projectRootPath, 'prisma', `${schemaId}.db`);
-  process.env.DATABASE_URL = `file:${databaseURL}`;
+  process.env.DATABASE_URL = `${process.env.DATABASE_URL}?schema=${schemaId}`;
 
-  run(`${prismaBin} migrate deploy`);
+  run('npm run prisma:deploy');
 
   console.info(`Database ${schemaId} created`);
 };
