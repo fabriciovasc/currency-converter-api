@@ -31,10 +31,9 @@ jobs:
       - name: Make environment
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_NODE_ENV: production
+          envkey_NODE_ENV: test
           envkey_API_VERSION: v1
           envkey_PORT: 8090
-          EXCHANGE_RATE_ACCESS_KEY: 'zzzzxxxyyyy'
 
       - name: Install dependencies
         run: npm ci
