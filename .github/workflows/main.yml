@@ -48,6 +48,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+
     steps:
       - uses: actions/checkout@v2
 
@@ -59,6 +63,7 @@ jobs:
         with:
           envkey_NODE_ENV: production
           envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          envkey_DATABASE_PROVIDER: ${{ secrets.DATABASE_PROVIDER }}
 
       - name: Run production migration
         run: npm run prisma:deploy
