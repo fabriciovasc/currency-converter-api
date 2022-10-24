@@ -59,25 +59,21 @@ class TransactionService {
       throw new HttpException(ErrorCode.INVALID_FIELD, `Invalid quoteCurrency ${quoteCurrency} for conversion`);
     }
 
-    const { conversionRate, quoteValue, quoteRate } = new CurrencyConverter(
-      baseValue,
-      baseCurrencyValue,
-      quoteCurrencyValue
-    );
+    const { conversionRate, quoteValue } = new CurrencyConverter(baseValue, baseCurrencyValue, quoteCurrencyValue);
 
     const transactionToSave: TransactionInput = {
       userId,
       baseValue,
       baseCurrency,
       quoteCurrency,
-      conversionRate,
-      quoteRate
+      conversionRate
     };
     const createdTransaction: Transaction = await prismaClient.transaction.create({
       data: transactionInputMapper(transactionToSave)
     });
 
     const transactionToReturn: TransactionOutput = transactionOutputMapper(createdTransaction);
+
     return { ...transactionToReturn, quoteValue };
   };
 
@@ -95,9 +91,12 @@ class TransactionService {
     }
 
     const userTransactionsWithQuoteValue: TransactionResponse[] = userTransactions.map((transaction) => {
-      const { baseValue, quoteRate, ...rest } = transactionOutputMapper(transaction);
+      const { baseValue, conversionRate, ...rest } = transactionOutputMapper(transaction);
+
+      const quoteRate = CurrencyConverter.findQuoteRate(conversionRate, baseValue);
       const quoteValue = CurrencyConverter.getQuote(baseValue, quoteRate);
-      return { ...rest, baseValue, quoteRate, quoteValue };
+
+      return { ...rest, baseValue, conversionRate, quoteValue };
     });
 
     return userTransactionsWithQuoteValue;

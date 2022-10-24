@@ -1,6 +1,6 @@
 import TransactionService from '@services/transaction.service';
-import prismaMock from '../../config/setup/prisma-mock';
 import { Prisma } from '@prisma/client';
+import prismaMock from '../../config/setup/prisma-mock';
 
 jest.mock('@services/exchange-rate-api.service');
 
@@ -184,6 +184,9 @@ describe('transaction service', () => {
       // Then
       await expect(TransactionService.getTransactionsByUserId(userId)).resolves.toEqual(
         expect.arrayContaining([
+          expect.not.objectContaining({
+            quoteRate: expect.any(Number)
+          }),
           expect.objectContaining({
             quoteValue: expect.any(Number)
           })
