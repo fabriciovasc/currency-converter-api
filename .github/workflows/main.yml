@@ -11,6 +11,7 @@ on:
 
 jobs:
   test:
+    environment: test
 
     runs-on: ubuntu-latest
 
@@ -34,6 +35,7 @@ jobs:
         run: npm run test
 
   deploy:
+    environment: production
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Only deploy main branch
 
@@ -47,8 +49,6 @@ jobs:
 
       - name: Run production migration
         run: npm run prisma:deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.12.12
