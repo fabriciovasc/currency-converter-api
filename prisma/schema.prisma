@@ -10,10 +10,11 @@ datasource db {
 model Transaction {
   id             Int      @id @default(autoincrement())
   userId         Int
-  baseCurrency   String
-  quoteCurrency  String
-  baseValue      Decimal
-  conversionRate Decimal
+  baseCurrency   String   @db.Char(3)
+  quoteCurrency  String   @db.Char(3)
+  baseValue      Decimal  @db.Money
+  conversionRate Decimal  @db.Decimal(15, 3)
+  quoteRate      Decimal  @db.Decimal(15, 3)
   createdAt      DateTime @default(now())
 
   @@map("transactions")
