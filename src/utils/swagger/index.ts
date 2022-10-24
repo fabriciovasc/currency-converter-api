@@ -7,7 +7,7 @@ const options = {
     info: {
       title: 'Currency Converter API',
       description: 'A simple currency converter API service',
-      version: config.app.version,
+      version: '0.0.0',
       contact: {
         url: 'github.com/fabriciovasc',
         name: 'fabriciovasc'

@@ -1,9 +1,6 @@
-import { name, version } from '../../package.json';
-
 const appConfig = {
   app: {
-    name: process.env.APP_NAME || name,
-    version,
+    name: process.env.APP_NAME,
     server: process.env.NODE_ENV,
     isDevelopment: process.env.NODE_ENV === 'development',
     apiVersion: process.env.API_VERSION,
