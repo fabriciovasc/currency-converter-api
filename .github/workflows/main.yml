@@ -11,8 +11,6 @@ on:
 
 jobs:
   test:
-    environment: test
-
     runs-on: ubuntu-latest
 
     services:
@@ -31,6 +29,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
         ports:
           # maps default postgres tcp port
           - 5432:5432
@@ -65,7 +64,10 @@ jobs:
         run: npm run test
 
   deploy:
-    environment: production
+    environment:
+      name: production
+      url: https://currency-converter-api-prod.herokuapp.com/
+
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Only deploy main branch
 
