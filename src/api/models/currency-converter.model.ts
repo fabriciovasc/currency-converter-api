@@ -7,18 +7,16 @@ class CurrencyConverter {
 
   public readonly conversionRate: number;
   public readonly quoteRate: number;
-  public readonly quoteValue: number;
 
   constructor(baseValue: number, baseCurrencyValue: number, quoteCurrencyValue: number) {
     this.baseValue = baseValue;
     this.baseCurrencyValue = baseCurrencyValue;
     this.quoteCurrencyValue = quoteCurrencyValue;
     this.conversionRate = this.getConversionRate();
-    this.quoteRate = CurrencyConverter.findQuoteRate(this.conversionRate, this.baseValue);
-    this.quoteValue = CurrencyConverter.getQuote(baseValue, this.quoteRate);
+    this.quoteRate = this.getQuoteRate();
   }
 
-  public static getQuote(baseValue: number, quoteRate: number): number {
+  public static getQuoteValue(baseValue: number, quoteRate: number): number {
     return handleCurrency(baseValue).multiply(quoteRate).value;
   }
 
@@ -26,18 +24,23 @@ class CurrencyConverter {
     return handleCurrency(conversionRate).divide(baseValue).value;
   }
 
-  private getConversionRate(): number {
-    let diffCurrencyValue;
-    let conversion;
-    if (this.quoteCurrencyValue > this.baseCurrencyValue) {
-      diffCurrencyValue = this.quoteCurrencyValue / this.baseCurrencyValue;
-      conversion = diffCurrencyValue * this.baseValue;
-      return handleCurrency(conversion).value;
+  public getQuoteRate(): number {
+    let value;
+    if (this.quoteCurrencyValue < this.baseCurrencyValue) {
+      value = handleCurrency(this.baseValue).divide(this.conversionRate).value;
+    } else {
+      value = handleCurrency(this.conversionRate).multiply(this.baseValue).value;
     }
 
-    diffCurrencyValue = this.baseCurrencyValue / this.quoteCurrencyValue;
-    conversion = this.baseValue / diffCurrencyValue;
-    return handleCurrency(conversion).value;
+    return handleCurrency(value).divide(this.baseValue).value;
+  }
+
+  private getConversionRate(): number {
+    if (this.quoteCurrencyValue > this.baseCurrencyValue) {
+      return handleCurrency(this.quoteCurrencyValue / this.baseCurrencyValue).value;
+    }
+
+    return handleCurrency(this.baseCurrencyValue / this.quoteCurrencyValue).value;
   }
 }
 
