@@ -28,6 +28,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      - name: Make environment
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          NODE_ENV: production
+          API_VERSION: v1
+          PORT: 8090
+          EXCHANGE_RATE_ACCESS_KEY: 'zzzzxxxyyyy'
+
       - name: Install dependencies
         run: npm ci
 
