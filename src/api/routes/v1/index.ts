@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import currencyConverterRouter from './currency-converter.route';
+import mainRouter from '@routes/v1/main.route';
 
 const router: Router = Router();
 
@@ -9,6 +9,6 @@ router.get('/', (req: Request, res: Response) => {
   });
 });
 
-router.use('/currency-converter', currencyConverterRouter);
+router.use('/', mainRouter);
 
 export default router;
