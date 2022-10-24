@@ -3,15 +3,15 @@ import {
   transactionInputMapper,
   TransactionOptionalInput,
   TransactionOutput,
-  transactionOutputMapper
+  transactionOutputMapper,
+  TransactionResponse,
+  transactionResponseMapper
 } from '@models/transaction.model';
 import HttpException, { ErrorCode } from '@models/http-exception.model';
 import ExchangeRateApiService from './exchange-rate-api.service';
 import CurrencyConverter from '@models/currency-converter.model';
 import { Transaction } from '@prisma/client';
 import prismaClient from '@database/prisma-client';
-
-type TransactionResponse = TransactionOutput & { quoteValue: number };
 
 class TransactionService {
   createTransaction = async ({
@@ -59,14 +59,15 @@ class TransactionService {
       throw new HttpException(ErrorCode.INVALID_FIELD, `Invalid quoteCurrency ${quoteCurrency} for conversion`);
     }
 
-    const { conversionRate, quoteValue } = new CurrencyConverter(baseValue, baseCurrencyValue, quoteCurrencyValue);
+    const { conversionRate, quoteRate } = new CurrencyConverter(baseValue, baseCurrencyValue, quoteCurrencyValue);
 
     const transactionToSave: TransactionInput = {
       userId,
       baseValue,
       baseCurrency,
       quoteCurrency,
-      conversionRate
+      conversionRate,
+      quoteRate
     };
     const createdTransaction: Transaction = await prismaClient.transaction.create({
       data: transactionInputMapper(transactionToSave)
@@ -74,7 +75,7 @@ class TransactionService {
 
     const transactionToReturn: TransactionOutput = transactionOutputMapper(createdTransaction);
 
-    return { ...transactionToReturn, quoteValue };
+    return transactionResponseMapper(transactionToReturn);
   };
 
   getTransactionsByUserId = async (userId: number): Promise<TransactionResponse[]> => {
@@ -91,12 +92,9 @@ class TransactionService {
     }
 
     const userTransactionsWithQuoteValue: TransactionResponse[] = userTransactions.map((transaction) => {
-      const { baseValue, conversionRate, ...rest } = transactionOutputMapper(transaction);
+      const transactionOutput = transactionOutputMapper(transaction);
 
-      const quoteRate = CurrencyConverter.findQuoteRate(conversionRate, baseValue);
-      const quoteValue = CurrencyConverter.getQuote(baseValue, quoteRate);
-
-      return { ...rest, baseValue, conversionRate, quoteValue };
+      return transactionResponseMapper(transactionOutput);
     });
 
     return userTransactionsWithQuoteValue;

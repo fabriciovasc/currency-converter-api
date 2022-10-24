@@ -184,9 +184,6 @@ describe('transaction service', () => {
       // Then
       await expect(TransactionService.getTransactionsByUserId(userId)).resolves.toEqual(
         expect.arrayContaining([
-          expect.not.objectContaining({
-            quoteRate: expect.any(Number)
-          }),
           expect.objectContaining({
             quoteValue: expect.any(Number)
           })
