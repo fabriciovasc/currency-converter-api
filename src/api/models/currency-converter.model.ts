@@ -14,16 +14,16 @@ class CurrencyConverter {
     this.baseCurrencyValue = baseCurrencyValue;
     this.quoteCurrencyValue = quoteCurrencyValue;
     this.conversionRate = this.getConversionRate();
-    this.quoteRate = this.getQuoteRate();
+    this.quoteRate = CurrencyConverter.findQuoteRate(this.conversionRate, this.baseValue);
     this.quoteValue = CurrencyConverter.getQuote(baseValue, this.quoteRate);
   }
 
-  static getQuote(baseValue: number, quoteRate: number): number {
+  public static getQuote(baseValue: number, quoteRate: number): number {
     return handleCurrency(baseValue).multiply(quoteRate).value;
   }
 
-  private getQuoteRate(): number {
-    return handleCurrency(this.conversionRate).divide(this.baseValue).value;
+  public static findQuoteRate(conversionRate: number, baseValue: number): number {
+    return handleCurrency(conversionRate).divide(baseValue).value;
   }
 
   private getConversionRate(): number {
