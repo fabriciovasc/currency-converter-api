@@ -15,6 +15,26 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+
+      postgres:
+        # docker hub image
+        image: postgres
+
+        # provide postgres credentials
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # maps default postgres tcp port
+          - 5432:5432
+
     strategy:
       matrix:
         node-version: [14.x]
@@ -32,8 +52,11 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_NODE_ENV: test
+          envkey_DATABASE_URL: postgresql://postgres:postgres@localhost:5432
           envkey_API_VERSION: v1
           envkey_PORT: 8090
+          file_name: .env.test
+          fail_on_empty: false
 
       - name: Install dependencies
         run: npm ci
@@ -63,7 +86,6 @@ jobs:
         with:
           envkey_NODE_ENV: production
           envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          envkey_DATABASE_PROVIDER: ${{ secrets.DATABASE_PROVIDER }}
 
       - name: Run production migration
         run: npm run prisma:deploy
