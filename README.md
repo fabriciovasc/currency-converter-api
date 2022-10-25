@@ -175,7 +175,7 @@ Here we will detail the requirements and installation
 - How to get a access key?
   - Subscribe in Free Plan
   - [Click here](https://apilayer.com/signup) to go the sign up page
-  - After signed up. (Click here)[https://apilayer.com/account] to go the API key page
+  - After signed up. [Click here](https://apilayer.com/account) to go the API key page
   - Copy Your API Key to Clipboard
   
   ![image](https://user-images.githubusercontent.com/42397106/197658018-43a7fad3-0899-451f-87a4-268e5f1f355e.png)
@@ -304,28 +304,26 @@ Some data transmitted in the service require agreements with standards, below so
 
 ### ISO 4217
 > [Click here](https://docs.1010data.com/1010dataReferenceManual/DataTypesAndFormats/currencyUnitCodes.html) for access currency codes
+
 Currency code format pattern. Compose of three letters. The code must be send in the body of request
 	
 ### Error Codes
 All the errors to be expected
 
-| Code			| Error Type			   | HTTP Code     				   |
+| Code			| Error Type			   | HTTP Code     |
 | ------------- | ------------------------ | ----------------------------- | 
-| 100			| Missing field 		   | Bad Request     			   |
-| 101			| Invalid field 	       | Bad Request     			   |
-| 102			| Unavailable api service  | Not Found     				   |
-| 103			| Transactions not found   | Service Unavailable		   |
+| 100			| Missing field 		   | Bad Request   |
+| 101			| Invalid field 	       | Bad Request       |
+| 102			| Unavailable api service  | Service Unavailable   |
+| 103			| Transactions not found   | Not Found		   |
 
 ### Log Levels
 All expected log levels
 
-| Log type		| Color     			   | Level      				   |
-| ------------- | ------------------------ | ----------------------------- | 
-| Error			| :red_circle: Red		   | 0			    			   |
-| Warning		| :yellow_circle: Yellow   | 1    						   |
-| Info			| :white_circle: Cyan	   | 2     						   |
+| Log type		| Color     		   | Level      				   |
+| ------------- | ------------------------ 	   | ----------------------------- | 
+| Error			| :red_circle: Red         | 0			    	   |
+| Warning		| :yellow_circle: Yellow   | 1    			   |
+| Info			| :white_circle: Cyan	   | 2     			|
 | HTTP			| :purple_circle: Magenta  | 3		   					   |
 | Debug			| :green_circle: Green	   | 4							   |
-
-
-
