@@ -6,7 +6,9 @@
   <p align="center">
     Service developed as a response to the challenge of the second stage of the Jaya company
     <br />
-    <a href="https://currency-converter-api-prod.herokuapp.com">Get deployed API URL</a>
+    <a href="https://currency-converter-api-prod.herokuapp.com/docs/v1" target="_blank">Go to API documentation</a>
+    ·
+    <a href="https://currency-converter-api-prod.herokuapp.com" target="_blank">Go to API</a>
   </p>
 </div>
 
