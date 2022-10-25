@@ -8,7 +8,7 @@
     <br />
     <a href="https://currency-converter-api-prod.herokuapp.com/docs/v1" target="_blank">Go to API documentation</a>
     ·
-    <a href="https://currency-converter-api-prod.herokuapp.com/docs/v1" target="_blank">Go to API</a>
+    <a href="https://currency-converter-api-prod.herokuapp.com" target="_blank">Go to API</a>
   </p>
 </div>
 
