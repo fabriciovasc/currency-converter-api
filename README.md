@@ -310,20 +310,20 @@ Currency code format pattern. Compose of three letters. The code must be send in
 ### Error Codes
 All the errors to be expected
 
-| Code			| Error Type			   | HTTP Code     				   |
+| Code			| Error Type			   | HTTP Code     |
 | ------------- | ------------------------ | ----------------------------- | 
-| 100			| Missing field 		   | Bad Request     			   |
-| 101			| Invalid field 	       | Bad Request     			   |
-| 102			| Unavailable api service  | Not Found     				   |
-| 103			| Transactions not found   | Service Unavailable		   |
+| 100			| Missing field 		   | Bad Request   |
+| 101			| Invalid field 	       | Bad Request       |
+| 102			| Unavailable api service  | Service Unavailable   |
+| 103			| Transactions not found   | Not Found		   |
 
 ### Log Levels
 All expected log levels
 
-| Log type		| Color     			   | Level      				   |
-| ------------- | ------------------------ | ----------------------------- | 
-| Error			| :red_circle: Red		   | 0			    			   |
-| Warning		| :yellow_circle: Yellow   | 1    						   |
-| Info			| :white_circle: Cyan	   | 2     						   |
+| Log type		| Color     		   | Level      				   |
+| ------------- | ------------------------ 	   | ----------------------------- | 
+| Error			| :red_circle: Red         | 0			    	   |
+| Warning		| :yellow_circle: Yellow   | 1    			   |
+| Info			| :white_circle: Cyan	   | 2     			|
 | HTTP			| :purple_circle: Magenta  | 3		   					   |
 | Debug			| :green_circle: Green	   | 4							   |
