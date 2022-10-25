@@ -73,6 +73,21 @@ describe('transaction service', () => {
       );
     });
 
+    test('should throw an error when creating transaction with invalid baseValue', async () => {
+      // Given
+      const transaction: any = {
+        userId: 1,
+        baseCurrency: 'USD',
+        quoteCurrency: 'BRL',
+        baseValue: -10
+      };
+
+      // Then
+      await expect(TransactionService.createTransaction(transaction)).rejects.toThrowError(
+        'baseValue must be greater than zero'
+      );
+    });
+
     test('should throw an error when creating transaction with invalid baseCurrency currency', async () => {
       // Given
       const transaction: any = {
