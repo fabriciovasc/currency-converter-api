@@ -40,6 +40,10 @@ class TransactionService {
       throw new HttpException(ErrorCode.MISSING_FIELD, 'baseValue is required');
     }
 
+    if (baseValue <= 0) {
+      throw new HttpException(ErrorCode.INVALID_FIELD, 'baseValue must be greater than zero');
+    }
+
     const exchangeRateApi = new ExchangeRateApiService();
 
     let exchangeRates: { [key: string]: number };
