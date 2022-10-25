@@ -30,9 +30,8 @@ const options = {
             baseCurrency: { type: 'string' },
             quoteCurrency: { type: 'string' },
             conversionRate: { type: 'number', format: 'float' },
-            quoteRate: { type: 'number', format: 'float' },
+            createdAt: { type: 'string', format: 'date-time' },
             quoteValue: { type: 'number', format: 'float' },
-            createdAt: { type: 'string', format: 'date-time' }
           }
         },
         UserTransactions: {
