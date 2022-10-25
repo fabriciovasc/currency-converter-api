@@ -34,10 +34,7 @@ const createServer = (): Application => {
   const router: Router = routes[apiVersion];
   app.use(`/api/${config.app.apiVersion}`, router);
 
-  if (config.app.isDevelopment) {
-    // Swagger API doc is available in development environment
-    app.use(`/docs/${apiVersion}`, swagger.serve, swagger.setup(specs));
-  }
+  app.use(`/docs/${apiVersion}`, swagger.serve, swagger.setup(specs));
 
   app.use(errorHandler);
 
