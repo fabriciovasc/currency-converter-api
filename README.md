@@ -175,7 +175,7 @@ Here we will detail the requirements and installation
 - How to get a access key?
   - Subscribe in Free Plan
   - [Click here](https://apilayer.com/signup) to go the sign up page
-  - After signed up. (Click here)[https://apilayer.com/account] to go the API key page
+  - After signed up. [Click here](https://apilayer.com/account) to go the API key page
   - Copy Your API Key to Clipboard
   
   ![image](https://user-images.githubusercontent.com/42397106/197658018-43a7fad3-0899-451f-87a4-268e5f1f355e.png)
