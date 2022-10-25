@@ -310,12 +310,12 @@ Currency code format pattern. Compose of three letters. The code must be send in
 ### Error Codes
 All the errors to be expected
 
-| Code			| Error Type			   | HTTP Code     |
-| ------------- | ------------------------ | ----------------------------- | 
-| 100			| Missing field 		   | Bad Request   |
-| 101			| Invalid field 	       | Bad Request       |
-| 102			| Unavailable api service  | Service Unavailable   |
-| 103			| Transactions not found   | Not Found		   |
+| Code			| Error Type			   | Expected Message                         | HTTP Code   |
+| ------------- | ------------------------ |------------------------------------------|-------------|
+| 100			| Missing field 		   | {field} is required                      | Bad Request |
+| 101			| Invalid field 	       | Invalid {field} {value} for conversion   | Bad Request         |
+| 102			| Unavailable api service  | {error_type}: {error_message}            | Service Unavailable |
+| 103			| Transactions not found   | {collection} not found for userId {id}		 | Not Found		         |
 
 ### Log Levels
 All expected log levels
