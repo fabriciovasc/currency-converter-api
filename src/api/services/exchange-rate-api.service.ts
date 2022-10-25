@@ -32,7 +32,19 @@ class ExchangeRateApiService extends HttpClientService {
     const base = 'EUR'; // Currency base available on free plan
     return this.http
       .get('/latest', { params: { base, symbols: symbols.join(',') } })
-      .then(<any>this.getRatesFromResponse);
+      .then(<any>this.getRatesFromResponse)
+      .catch(this.handleResponseError);
+  };
+
+  private handleResponseError = (error: any) => {
+    const errorResponse = error?.response;
+    if (errorResponse?.data) {
+      const { error } = errorResponse.data;
+      const { code = 'unknown_error', message = 'External API error' } = error || {};
+      const errorMessage = `${code}: ${message}`;
+      throw new Error(errorMessage);
+    }
+    return error;
   };
 
   private getRatesFromResponse = (response: {
@@ -40,11 +52,6 @@ class ExchangeRateApiService extends HttpClientService {
     rates: { [key: string]: number };
     error?: { type: string; message: string };
   }): { [key: string]: number } => {
-    if (!response.success) {
-      const { type = 'unknown_error', message = 'External API error' } = response.error || {};
-      const errorMessage = `${type}: ${message}`;
-      throw new Error(errorMessage);
-    }
     return response?.rates;
   };
 }
