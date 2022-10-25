@@ -3,6 +3,6 @@ import TransactionController from '@controllers/transaction.controller';
 
 const transactionRouter: Router = Router();
 
-transactionRouter.post('/', TransactionController.createTransaction);
+transactionRouter.route('/transactions').post(TransactionController.createTransaction);
 
 export default transactionRouter;

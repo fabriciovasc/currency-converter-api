@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
-import mainRouter from '@routes/v1/main.route';
+import transactionRouter from '@routes/v1/transaction.route';
+import userRouter from '@routes/v1/user.route';
 
 const router: Router = Router();
 
@@ -9,6 +10,7 @@ router.get('/', (req: Request, res: Response) => {
   });
 });
 
-router.use('/', mainRouter);
+router.use(transactionRouter);
+router.use(userRouter);
 
 export default router;
