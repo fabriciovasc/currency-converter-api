@@ -304,6 +304,7 @@ Some data transmitted in the service require agreements with standards, below so
 
 ### ISO 4217
 > [Click here](https://docs.1010data.com/1010dataReferenceManual/DataTypesAndFormats/currencyUnitCodes.html) for access currency codes
+
 Currency code format pattern. Compose of three letters. The code must be send in the body of request
 	
 ### Error Codes
@@ -326,6 +327,3 @@ All expected log levels
 | Info			| :white_circle: Cyan	   | 2     						   |
 | HTTP			| :purple_circle: Magenta  | 3		   					   |
 | Debug			| :green_circle: Green	   | 4							   |
-
-
-
