@@ -1,6 +1,6 @@
 {
   "name": "currency-converter-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple currency converter service",
   "main": "build/index.js",
   "types": "build/index.d.ts",
