@@ -206,7 +206,7 @@ Let's install our application by running some commands
 	EXCHANGE_RATE_ACCESS_KEY=YOUR_EXCHANGE_RATE_ACCESS_KEY
 	```
 	<p align="right">
-	* <a href="/blob/main/.env.example">Click here!</a> to go .env.example file
+	* <a href="/.env.example">Click here!</a> to go .env.example file
 	</p>
 
 3. Install packages
